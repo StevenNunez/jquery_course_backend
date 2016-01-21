@@ -14,22 +14,34 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+function courseTemplate(name, details){
+  return `<li class="course">
+      ${name}
+      <div class="details">
+        ${details}
+      </div>
+    </li>`
+}
 $(function(){
   $('.courses').on('click', '.course', function(){
     $(this).find('.details').slideToggle();
   });
 
+  $.getJSON('/courses', function(courses){
+    var remoteCourses = courses.map(function(course){
+      return courseTemplate(course.name, course.details)
+    });
+    $('.courses').append(remoteCourses);
+  });
   $('#add-new-course').on('submit', function(event){
     event.preventDefault();
     var courseName = $(this).find('#course-name').val();
     var courseDetails = $(this).find('#course-details').val();
-    var template = `<li class="course">
-      ${courseName}
-      <div class="details">
-        ${courseDetails}
-      </div>
-    </li>`
-    $('.courses').append(template);
-    this.reset();
+
+    $.post('/courses', {course: {name: courseName, details: courseDetails}}, function(course){
+      var template =  courseTemplate(course.name, course.details)
+      $('.courses').append(template);
+      this.reset();
+    }.bind(this))
   });
 });
