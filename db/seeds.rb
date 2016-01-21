@@ -1,7 +1,27 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+puts "Starting"
+Course.create(name: "Hat making", details: "Make hats with the weirdest stuff")
+Course.create(name: "Trigonometry", details: "sin+cos+tan stuff")
+Course.create(name: "The Art of Letting Go", details: "It's exceedingly hurtful")
+Course.create(name: "History and Theory of Ping Pong: An Introspective", details: "Professor Vary explains the origins of the world's greatest sport.")
+Course.create(name: "Cat raking", details: "rake cats with the weirdest sluff")
+Course.create(name: "Fracking 201", details: "Implementing dirty politics to get the good stuff")
+Course.create(name: "Underwater Butter Churning", details:"Churn Butter... underwater... with scuba gear")
+Course.create(name: "A History of the Postal Service in Monmouth County", details: "Unsurprisingly boring")
+Course.create(name:"Bedazzling in danger: Extreme bedazzling", details:"Adrenaline junkies only")
+Course.create(name: "Best parts of the song Purple Rain", details: "Learn to appreciate the part when Prince goes Wooooo hooooo hooooo hooooo")
+Course.create(name: "ruby on rails", details: "solve the worlds problems")
+Course.create(name: "Philosophy", details: "shut up it's important")
+Course.create(name:"Putting Birds on Things", details: "We’ll teach you how to take something, and forcibly affix a bird on it.")
+Course.create(name:"mushroom picking", details:"picking mushrooms")
+Course.create(name: "Advanced Selfienomics", details: "Strike your pose")
+Course.create(name: "Strong Coffee", details: "Making a strong cup of coffee that will prevent you from sleeping in class")
+Course.create(name: "Napping for Idiots", details: "Pre-requisites required")
+Course.create(name: "Jellyfish keeping", details: "Everything you need to know about keeping a jellyfish alive")
+Course.create(name: "Hair Crimping", details: "How to ride a bike.")
+Course.create(name: "Intro to Sweep Picking", details: "Learn to shred like the Yngwie")
+Course.create(name: "History of Horror Movies", details: "Learn the history of horror movies")
+Course.create(name: "The Social Complexities of Line Dancing", details: "Navigates the unwritten rules of southern social dance, with moonshine")
+Course.create(name: "The Zen of Many Shoes", details: "meditations on the therapeutic nature of many shoes")
+Course.create(name: "Serpent",details:'your programs have a mind of their own!')
+Course.create(name: 'Duck Breeding', details: 'Learn to breed ducks!')
+puts "Done"
