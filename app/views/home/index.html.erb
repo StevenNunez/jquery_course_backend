@@ -1,2 +1,25 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<ul class="courses">
+  <li class="course">
+    Learn Ruby
+    <div class="details">
+      Learn Ruby, It loves you. Be happy.
+    </div>
+  </li>
+  <li class="course">
+    Learn JavaScript
+    <div class="details">
+      Learn JavaScript... you have to eat.
+    </div>
+  </li>
+  <li class="course">
+    Learn Elixir
+    <div class="details">
+      So functional
+    </div>
+  </li>
+</ul>
+<form id='add-new-course'>
+  <input type="text" id="course-name" name="course[name]" placeholder="Enter Course Name">
+  <input type="text" id="course-details" name="course[details]" placeholder="Enter Course Details">
+  <input type="submit" value="Add Course">
+</form>
