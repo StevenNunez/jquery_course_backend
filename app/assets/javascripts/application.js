@@ -30,14 +30,10 @@ function Course(id, name, details){
 }
 
 Course.all = function(callback){
-  // Get the json
   $.getJSON('/courses', function(coursesJson){
-    // Convert the responses to an array of Course Objects
     var courses = coursesJson.map(function(course){
       return Course.newFromJSON(course)
     });
-    // Call the function (callback), with the array of Course Objects
-    //   as the argument
     callback(courses);
   });
 }
@@ -53,6 +49,21 @@ Course.prototype.toTemplate = function(){
         ${this.details}
       </div>
     </li>`
+};
+Course.prototype.toParams = function () {
+  return {
+    course: {
+      name: this.name,
+      details: this.details
+    }
+  };
+};
+
+Course.prototype.save = function (callback) {
+  $.post('/courses', this.toParams(), function(json){
+    var course = Course.newFromJSON(json);
+    callback(course);
+  });
 };
 
 // toTemplate
@@ -73,22 +84,15 @@ $(function(){
 
   Course.all(appendToPage);
 
-  // $.getJSON('/courses', function(courses){
-  //   var remoteCourses = courses.map(function(course){
-  //     var courseObject = new Course(course.id, course.name, course.details);
-  //     return courseObject.toTemplate();
-  //   });
-  //   $('.courses').append(remoteCourses);
-  // });
   $('#add-new-course').on('submit', function(event){
     event.preventDefault();
     var courseName = $(this).find('#course-name').val();
     var courseDetails = $(this).find('#course-details').val();
-
-    $.post('/courses', {course: {name: courseName, details: courseDetails}}, function(course){
-      var template =  courseTemplate(course.name, course.details)
-      $('.courses').append(template);
+    // TODO: Gross
+    var course = new Course(null, courseName, courseDetails);
+    course.save(function(course){
+      $('.courses').append(course.toTemplate());
       this.reset();
-    }.bind(this))
+    }.bind(this));
   });
 });
