@@ -30,12 +30,11 @@ function Course(id, name, details){
 }
 
 Course.all = function(callback){
-  $.getJSON('/courses', function(coursesJson){
-    var courses = coursesJson.map(function(course){
-      return Course.newFromJSON(course)
+  $.getJSON('/courses').then(function(jsons){
+    return jsons.map(function(json){
+      return Course.newFromJSON(json)
     });
-    callback(courses);
-  });
+  }).then(callback);
 }
 
 Course.newFromJSON = function(json){
@@ -50,6 +49,7 @@ Course.prototype.toTemplate = function(){
       </div>
     </li>`
 };
+
 Course.prototype.toParams = function () {
   return {
     course: {
@@ -60,15 +60,10 @@ Course.prototype.toParams = function () {
 };
 
 Course.prototype.save = function (callback) {
-  $.post('/courses', this.toParams(), function(json){
-    var course = Course.newFromJSON(json);
-    callback(course);
-  });
+  $.post('/courses', this.toParams()).then(function(json){
+    return Course.newFromJSON(json)
+  }).then(callback);
 };
-
-// toTemplate
-// save
-// Course.all
 
 $(function(){
   $('.courses').on('click', '.course', function(){
